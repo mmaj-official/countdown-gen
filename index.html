@@ -16,6 +16,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      box-sizing: border-box;
     }
 
     #countdownImage {
@@ -32,12 +33,15 @@
       flex-direction: column;
       gap: 14px;
       align-items: center;
+      width: 100%;
+      max-width: 320px;
       margin-bottom: 2rem;
     }
 
     .button-group button,
     .button-group a {
-      width: 280px;
+      display: inline-block;
+      width: 100%;
       padding: 12px 18px;
       border-radius: 8px;
       font-size: 1rem;
@@ -59,11 +63,15 @@
 
     .footer {
       margin-top: auto;
-      text-align: right;
-      font-size: 0.85rem;
-      color: white;
       width: 100%;
       max-width: 960px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: white;
+      padding: 1rem;
+      box-sizing: border-box;
     }
 
     .footer a {
@@ -71,32 +79,19 @@
       font-weight: 600;
       font-size: 1rem;
       text-decoration: none;
-      float: right;
     }
 
-    .footer span {
-      float: left;
-    }
-
-    @media (max-width: 500px) {
-      .button-group button,
-      .button-group a {
-        width: 90%;
-      }
+    @media (max-width: 600px) {
       .footer {
+        flex-direction: column;
         text-align: center;
-      }
-      .footer span,
-      .footer a {
-        float: none;
-        display: block;
-        margin: 0.25rem 0;
+        gap: 0.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <img id="countdownImage" src="generated.png" alt="Countdown Image" />
+  <img id="countdownImage" src="https://raw.githubusercontent.com/mmaj-official/countdown-gen/2b57c8227bab02d9c7088aca209f1a14b9a29741/Countdown_template.png" alt="Countdown Image" />
   <div class="button-group">
     <button id="download_button">💾 Download Image</button>
     <a href="https://twitter.com/intent/tweet?text=Mela! Mela! Anime Japan!! Countdown is on! 🎉%0AJoin us at mmaj.jp%0A%0A#mmaj_2025%0A#MelaMelaAnimeJapan%0A#MelaMelaAnimeJapan2025%0A%0A@mmaj_official" target="_blank">🐦 Share on X</a>
