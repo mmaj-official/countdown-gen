@@ -1,200 +1,83 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mela! Mela! Anime Japan!! | Countdown Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .container {
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px;
-    }
-    canvas {
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .button-group {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-    }
-    button, a {
-      width: 100%;
-      text-align: center;
-      padding: 12px 20px;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      text-decoration: none;
-      color: black;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      transition: background-color 0.3s ease;
-    }
-    button:hover, a:hover {
-      background-color: #f2f2f2;
-    }
-  </style>
+  
+<div class="blob"></div>
+<div class="noise"></div>
+
+<style>
+  body {
+    background: #0a0000;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .blob {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at 35% 35%, #FF5050, #4D0000);
+    border-radius: 50%;
+    filter: blur(200px);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+    animation: floatBlob 20s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes floatBlob {
+    0% { transform: translate(-90%, -90%) scale(1.05); }
+    25% { transform: translate(-20%, -70%) scale(1.25); }
+    50% { transform: translate(10%, -30%) scale(0.85); }
+    75% { transform: translate(50%, 40%) scale(1.2); }
+    100% { transform: translate(-50%, 10%) scale(1.0); }
+  }
+
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJNJREFUeNrs1DEOwiAQRNHuP//rGwUIIS9ykRJp9zqTiFqLmedzGqUJD7BMDLkIAQIECBAgQID8JfB7cgypCT6B01pY1Ia03uOITkkpFmS6rT7ebcFvY6YrD2V7I9u+Yc48sEA4O7YZwdj0ivhWuhHrJ+nh/xZ7vzTBAgQIECBAgMDPAgwA2R5DjFq8m+4AAAAASUVORK5CYII=");
+    opacity: 0.03;
+    animation: grainMotion 1s steps(3) infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes grainMotion {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+    100% { transform: translate(0, 0); }
+  }
+</style>
+
 </head>
 <body>
-  <div class="container">
-    <canvas id="canvas" width="1080" height="1080"></canvas>
-    
-    
-    
+  <div id="countdown-container">
+    <img id="countdownImage" src="" alt="Countdown Image" />
+  </div>
+  
 <div class="button-group">
   <button id="download_button">💾 Download Image</button>
   <a href="https://twitter.com/intent/tweet?text=" target="_blank">🐦 Share on X</a>
   <a href="index_instagram.html">📸 Share on Instagram</a>
 </div>
 
-    <div style="margin-top: 30px; font-size: 0.75rem; color: #888; text-align: center;">
-      <a href="https://mmaj.jp" target="_blank" style="color: #888; text-decoration: none;">🔗 mmaj.jp</a><br>
-      <span>© Mela! Mela! Anime Japan!! Executive Committee</span>
-    </div>
-    
-      <a href="https://twitter.com/intent/tweet?text=Mela%21%20Mela%21%20Anime%20Japan%21%21%20Countdown%20is%20on%21%20%F0%9F%8E%89%0AJoin%20us%20at%20mmaj.jp%0A%0A%23mmaj_2025%0A%23MelaMelaAnimeJapan%0A%23MelaMelaAnimeJapan2025%0A%0A%40mmaj_officialMela! Mela! Anime Japan!! Countdown is on! 🎉%0AJoin us at countdown.mmaj.jp%0A#MMAJ #AnimeJapan" target="_blank">🐦 Share on X</a>
-    
-      <button id="download_button">💾 Download Image</button>
-      <a href="index_instagram.html">📸 Share on Instagram</a>
-    </div>
-  </div>
 
-  <script>
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = "https://countdown.mmaj.jp/Countdown_template.png";
-
-    img.onload = () => {
-      document.fonts.ready.then(() => {
-        const now = new Date();
-        const target = new Date(Date.UTC(2025, 8, 12, 18, 30, 0));
-        const diff = target - now;
-        const totalSec = Math.floor(diff / 1000);
-        const days = Math.floor(totalSec / 86400);
-        const hours = Math.floor((totalSec % 86400) / 3600);
-        const minutes = Math.floor((totalSec % 3600) / 60);
-        const seconds = totalSec % 60;
-        const text = `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
-
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        ctx.font = "italic 300 76px 'Inter', sans-serif";
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-      });
-    };
-
-    document.getElementById("download_button").onclick = () => {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, '0');
-      const dd = String(today.getDate()).padStart(2, '0');
-      const filename = `mmaj_countdown_${yyyy}-${mm}-${dd}.png`;
-
-      const link = document.createElement("a");
-      link.download = filename;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    };
-  </script>
-
-    <div style="position: fixed; bottom: 10px; right: 12px; font-size: 0.75rem; color: #888; text-align: right; line-height: 1.4;">
-      <a href="https://mmaj.jp" target="_blank" style="color: #888; text-decoration: none; display: block;">🔗 mmaj.jp</a>
-      <span>© Mela! Mela! Anime Japan!! Executive Committee</span>
-    </div>
-    
-<!-- Google Analytics Tracking -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-54Z7BN6R7G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-54Z7BN6R7G');
-
-  // Track button clicks
-  function trackClick(label) {
-    gtag('event', 'click', {
-      event_category: 'interaction',
-      event_label: label
-    });
-  }
-</script>
-
-<!-- Google Sheets Logging via Apps Script endpoint -->
-<script>
-  function logEvent(label) {
-    fetch('https://script.google.com/macros/s/AKfycbxtZtcrS48uyxsanPn6CqFez0q21A4jkcqpktGlVrzaYqCQSzlnDBwSeR5IMSLLPgSf/exec', {
-      method: 'POST',
-      body: JSON.stringify({ event: label, timestamp: new Date().toISOString() })
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const dlBtn = document.getElementById("download_button");
-    const xBtn = document.querySelector('a[href*="twitter.com/intent/tweet"]');
-    const instaBtn = document.querySelector('a[href*="index_instagram.html"]');
-
-    if (dlBtn) {
-      dlBtn.addEventListener("click", () => {
-        trackClick("Download_Main");
-        logEvent("Download_Main");
-      });
-    }
-
-    if (xBtn) {
-      xBtn.addEventListener("click", () => {
-        trackClick("Share_X");
-        logEvent("Share_X");
-      });
-    }
-
-    if (instaBtn) {
-      instaBtn.addEventListener("click", () => {
-        trackClick("Share_Instagram");
-        logEvent("Share_Instagram");
-      });
-    }
-  });
-</script>
-
-
-<div style="position: fixed; bottom: 12px; right: 16px; font-size: 0.9rem; color: white; text-align: right; line-height: 1.5; font-weight: 600;">
+<div style="position: fixed; bottom: 12px; right: 16px; font-size: 1rem; color: white; text-align: right; line-height: 1.5; font-weight: 600;">
   <a href="https://mmaj.jp" target="_blank" style="color: white; text-decoration: none;">🔗 mmaj.jp</a><br>
   <span style="font-weight: normal; font-size: 0.75rem;">© Mela! Mela! Anime Japan!! Executive Committee</span>
 </div>
 </body>
 
-    
-</html>
