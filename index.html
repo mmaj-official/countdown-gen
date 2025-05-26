@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mela! Mela! Anime Japan!! | Countdown Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,500&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -17,6 +18,7 @@
       align-items: center;
       min-height: 100vh;
       box-sizing: border-box;
+      position: relative;
     }
 
     canvas {
@@ -40,7 +42,7 @@
 
     .button-group button,
     .button-group a {
-      display: inline-block;
+      display: block;
       width: 100%;
       padding: 12px 18px;
       border-radius: 8px;
@@ -62,16 +64,14 @@
     }
 
     .footer {
-      margin-top: auto;
-      width: 100%;
-      max-width: 960px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
+      position: fixed;
+      bottom: 12px;
+      right: 16px;
+      text-align: right;
       color: white;
-      padding: 1rem;
-      box-sizing: border-box;
+      line-height: 1.5;
+      font-size: 0.9rem;
+      font-weight: 400;
     }
 
     .footer a {
@@ -79,14 +79,6 @@
       font-weight: 600;
       font-size: 1rem;
       text-decoration: none;
-    }
-
-    @media (max-width: 600px) {
-      .footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
-      }
     }
   </style>
 </head>
@@ -100,8 +92,8 @@
   </div>
 
   <div class="footer">
+    <a href="https://mmaj.jp" target="_blank">🔗 mmaj.jp</a><br>
     <span>© Mela! Mela! Anime Japan!! Executive Committee</span>
-    <a href="https://mmaj.jp" target="_blank">🔗 mmaj.jp</a>
   </div>
 
   <script>
@@ -116,7 +108,7 @@
     }
 
     function getCountdownText() {
-      const targetDate = new Date(Date.UTC(2025, 8, 12, 18, 30, 0)); // インド時間 9/13 0:00
+      const targetDate = new Date(Date.UTC(2025, 8, 12, 18, 30, 0)); // 9/13 0:00 IST
       const now = new Date();
       const diff = targetDate - now;
 
@@ -135,7 +127,7 @@
       ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
       const text = getCountdownText();
       ctx.fillStyle = "white";
-      ctx.font = "60px 'Inter', sans-serif";
+      ctx.font = "60px Inter, sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 20);
     }
