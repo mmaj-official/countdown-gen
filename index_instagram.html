@@ -4,45 +4,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Countdown Image Generator</title>
+  <title>Instagram Countdown Image</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
       background-color: #000;
       color: white;
       font-family: 'Inter', sans-serif;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 20px;
+    }
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
     }
     canvas {
-      max-width: 90vw;
+      width: 100%;
       height: auto;
+      max-width: 100%;
+      border-radius: 8px;
       margin-bottom: 20px;
     }
+    .button-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
     button, a {
-      margin: 10px;
-      padding: 10px 20px;
+      width: 100%;
+      text-align: center;
+      padding: 12px 20px;
       font-size: 1rem;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
       text-decoration: none;
-      color: white;
-      background-color: #ff3c3c;
-      border: none;
-      border-radius: 4px;
+      color: black;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
     }
-    a {
-      display: inline-block;
+    button:hover, a:hover {
+      background-color: #f2f2f2;
     }
   </style>
 </head>
 <body>
-  <canvas id="canvas" width="1080" height="1350"></canvas>
-  <div>
-    <button id="download_button">画像をダウンロード</button>
-    <a id="open_insta" href="https://www.instagram.com/" target="_blank">Instagramを開く</a>
+  <div class="container">
+    <canvas id="canvas" width="1080" height="1350"></canvas>
+    <div class="button-group">
+      <button id="download_button">💾 Download Image</button>
+      <a href="https://www.instagram.com/" target="_blank">📸 Open Instagram</a>
+    </div>
   </div>
 
   <script>
