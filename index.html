@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countdown Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      font-family: sans-serif;
+      color: white;
+    }
+    #status {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="1080" height="1080"></canvas>
+  <p id="status">Generating image...</p>
+
+  <img id="bg" src="https://storage.googleapis.com/studio-design-asset-files/projects/V5a7N82mqR/s-1080x1080_v-fs_webp_7c6b5a90-d0ef-459b-a4e8-71ea02256e8d.png" style="display: none" crossorigin="anonymous" />
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = document.getElementById("bg");
+    const status = document.getElementById("status");
+
+    img.onload = () => {
+      const now = new Date();
+      const target = new Date(Date.UTC(2025, 8, 12, 18, 30, 0));
+      const diff = target - now;
+
+      if (diff <= 0) {
+        status.innerText = "The event has passed.";
+        return;
+      }
+
+      const totalSec = Math.floor(diff / 1000);
+      const days = Math.floor(totalSec / 86400);
+      const hours = Math.floor((totalSec % 86400) / 3600);
+      const minutes = Math.floor((totalSec % 3600) / 60);
+      const seconds = totalSec % 60;
+      const text = `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.font = "64px sans-serif";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+      const link = document.createElement("a");
+      link.download = "countdown.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+
+      status.innerText = "✅ Image downloaded.";
+    };
+
+    img.onerror = () => {
+      status.innerText = "⚠️ Failed to load image.";
+    };
+  </script>
+</body>
+</html>
