@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Countdown Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,500&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -15,7 +15,7 @@
       align-items: center;
       height: 100vh;
       flex-direction: column;
-      font-family: sans-serif;
+      font-family: 'Inter', sans-serif;
       color: white;
     }
     #status {
@@ -53,7 +53,7 @@
       const text = `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      ctx.font = "64px sans-serif";
+      ctx.font = "64px 'Inter', sans-serif";
       ctx.fillStyle = "white";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
