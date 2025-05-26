@@ -39,21 +39,21 @@
   </style>
 </head>
 <body>
-  <canvas id="canvas" width="1080" height="1080"></canvas>
+  <canvas id="canvas" width="1080" height="1350"></canvas>
   <div>
     <button id="download_button">画像をダウンロード</button>
-    <button id="download_instagram">Instagramに投稿</button>
+    <a id="open_insta" href="https://www.instagram.com/" target="_blank">Instagramを開く</a>
   </div>
 
   <script>
-    const squareCanvas = document.getElementById("canvas");
-    const squareCtx = squareCanvas.getContext("2d");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
-    const squareImg = new Image();
-    squareImg.crossOrigin = "anonymous";
-    squareImg.src = "https://storage.googleapis.com/studio-design-asset-files/projects/V5a7N82mqR/s-1080x1080_v-fs_webp_d524d621-b749-4a5c-907c-92308a1d1ef9.png";
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = "https://mmaj-official.github.io/countdown-gen/Countdown_template_instagram.png";
 
-    squareImg.onload = () => {
+    img.onload = () => {
       document.fonts.ready.then(() => {
         const now = new Date();
         const target = new Date(Date.UTC(2025, 8, 12, 18, 30, 0));
@@ -65,61 +65,20 @@
         const seconds = totalSec % 60;
         const text = `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
 
-        squareCtx.drawImage(squareImg, 0, 0, squareCanvas.width, squareCanvas.height);
-        squareCtx.font = "italic 300 76px 'Inter', sans-serif";
-        squareCtx.fillStyle = "white";
-        squareCtx.textAlign = "center";
-        squareCtx.textBaseline = "middle";
-        squareCtx.fillText(text, squareCanvas.width / 2, squareCanvas.height / 2);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.font = "italic 300 80px 'Inter', sans-serif";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
       });
     };
 
     document.getElementById("download_button").onclick = () => {
       const link = document.createElement("a");
-      link.download = "countdown_square.png";
-      link.href = squareCanvas.toDataURL("image/png");
+      link.download = "countdown_instagram.png";
+      link.href = canvas.toDataURL("image/png");
       link.click();
-    };
-
-    document.getElementById("download_instagram").onclick = () => {
-      const portraitCanvas = document.createElement("canvas");
-      portraitCanvas.width = 1080;
-      portraitCanvas.height = 1350;
-      const portraitCtx = portraitCanvas.getContext("2d");
-
-      const portraitImg = new Image();
-      portraitImg.crossOrigin = "anonymous";
-      portraitImg.src = "https://mmaj-official.github.io/countdown-gen/Countdown_template_instagram.png";
-
-      portraitImg.onload = () => {
-        document.fonts.ready.then(() => {
-          const now = new Date();
-          const target = new Date(Date.UTC(2025, 8, 12, 18, 30, 0));
-          const diff = target - now;
-          const totalSec = Math.floor(diff / 1000);
-          const days = Math.floor(totalSec / 86400);
-          const hours = Math.floor((totalSec % 86400) / 3600);
-          const minutes = Math.floor((totalSec % 3600) / 60);
-          const seconds = totalSec % 60;
-          const text = `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
-
-          portraitCtx.drawImage(portraitImg, 0, 0, portraitCanvas.width, portraitCanvas.height);
-          portraitCtx.font = "italic 300 80px 'Inter', sans-serif";
-          portraitCtx.fillStyle = "white";
-          portraitCtx.textAlign = "center";
-          portraitCtx.textBaseline = "middle";
-          portraitCtx.fillText(text, portraitCanvas.width / 2, portraitCanvas.height / 2);
-
-          const link = document.createElement("a");
-          link.download = "countdown_instagram.png";
-          link.href = portraitCanvas.toDataURL("image/png");
-          link.click();
-
-          setTimeout(() => {
-            window.open("https://www.instagram.com/", "_blank");
-          }, 1000);
-        });
-      };
     };
   </script>
 </body>
