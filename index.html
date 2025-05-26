@@ -68,11 +68,13 @@
     <canvas id="canvas" width="1080" height="1080"></canvas>
     
     
-    <div class="button-group">
-      <button id="download_button">💾 Download Image</button>
-      <a href="https://twitter.com/intent/tweet?text=" target="_blank">🐦 Share on X</a>
-      <a href="index_instagram.html">📸 Share on Instagram</a>
-    </div>
+    
+<div class="button-group">
+  <button id="download_button">💾 Download Image</button>
+  <a href="https://twitter.com/intent/tweet?text=" target="_blank">🐦 Share on X</a>
+  <a href="index_instagram.html">📸 Share on Instagram</a>
+</div>
+
     <div style="margin-top: 30px; font-size: 0.75rem; color: #888; text-align: center;">
       <a href="https://mmaj.jp" target="_blank" style="color: #888; text-decoration: none;">🔗 mmaj.jp</a><br>
       <span>© Mela! Mela! Anime Japan!! Executive Committee</span>
@@ -132,6 +134,67 @@
       <a href="https://mmaj.jp" target="_blank" style="color: #888; text-decoration: none; display: block;">🔗 mmaj.jp</a>
       <span>© Mela! Mela! Anime Japan!! Executive Committee</span>
     </div>
-    </body>
+    
+<!-- Google Analytics Tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54Z7BN6R7G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-54Z7BN6R7G');
+
+  // Track button clicks
+  function trackClick(label) {
+    gtag('event', 'click', {
+      event_category: 'interaction',
+      event_label: label
+    });
+  }
+</script>
+
+<!-- Google Sheets Logging via Apps Script endpoint -->
+<script>
+  function logEvent(label) {
+    fetch('https://script.google.com/macros/s/AKfycbxtZtcrS48uyxsanPn6CqFez0q21A4jkcqpktGlVrzaYqCQSzlnDBwSeR5IMSLLPgSf/exec', {
+      method: 'POST',
+      body: JSON.stringify({ event: label, timestamp: new Date().toISOString() })
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const dlBtn = document.getElementById("download_button");
+    const xBtn = document.querySelector('a[href*="twitter.com/intent/tweet"]');
+    const instaBtn = document.querySelector('a[href*="index_instagram.html"]');
+
+    if (dlBtn) {
+      dlBtn.addEventListener("click", () => {
+        trackClick("Download_Main");
+        logEvent("Download_Main");
+      });
+    }
+
+    if (xBtn) {
+      xBtn.addEventListener("click", () => {
+        trackClick("Share_X");
+        logEvent("Share_X");
+      });
+    }
+
+    if (instaBtn) {
+      instaBtn.addEventListener("click", () => {
+        trackClick("Share_Instagram");
+        logEvent("Share_Instagram");
+      });
+    }
+  });
+</script>
+
+
+<div style="position: fixed; bottom: 12px; right: 16px; font-size: 0.9rem; color: white; text-align: right; line-height: 1.5; font-weight: 600;">
+  <a href="https://mmaj.jp" target="_blank" style="color: white; text-decoration: none;">🔗 mmaj.jp</a><br>
+  <span style="font-weight: normal; font-size: 0.75rem;">© Mela! Mela! Anime Japan!! Executive Committee</span>
+</div>
+</body>
+
     
 </html>
