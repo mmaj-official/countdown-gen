@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
   <style>
     body {
-      overflow-x: hidden;
       font-family: 'Inter', sans-serif;
       background: black;
       color: white;
@@ -19,6 +18,7 @@
       align-items: center;
       justify-content: space-between;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     canvas {
@@ -57,8 +57,9 @@
       text-align: right;
       font-size: 0.9rem;
       color: white;
-      padding: 10px;
+      padding: 10px 20px 20px 10px;
       width: 100%;
+      box-sizing: border-box;
     }
 
     .footer a {
@@ -86,9 +87,8 @@
     const ctx = canvas.getContext("2d");
 
     const bgImage = new Image();
-bgImage.crossOrigin = "anonymous";
-    bgImage.crossOrigin = "anonymous"; // Avoid CORS tainting
-    bgImage.src = "https://mmaj-official.github.io/countdown-gen/Countdown_template.png";
+    bgImage.crossOrigin = "anonymous";
+    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template.png";
 
     bgImage.onload = () => {
       ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
@@ -111,27 +111,16 @@ bgImage.crossOrigin = "anonymous";
     };
 
     function downloadImage() {
-      try {
-        const link = document.createElement("a");
-        const now = new Date().toISOString().slice(0, 10);
-        link.download = `mmaj_countdown_${now}.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-      } catch (err) {
-        alert("Download failed due to cross-origin image. Please host the image with proper CORS headers.");
-      }
+      const link = document.createElement("a");
+      const now = new Date().toISOString().slice(0, 10);
+      link.download = `mmaj_countdown_${now}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
     }
 
     function shareOnX() {
       const text = encodeURIComponent(
-        `Mela! Mela! Anime Japan!! Countdown is on! 🎉
-Join us at mmaj.jp
-
-#mmaj_2025
-#MelaMelaAnimeJapan
-#MelaMelaAnimeJapan2025
-
-@mmaj_official`
+        `Mela! Mela! Anime Japan!! Countdown is on! 🎉\nJoin us at mmaj.jp\n\n#mmaj_2025\n#MelaMelaAnimeJapan\n#MelaMelaAnimeJapan2025\n\n@mmaj_official`
       );
       window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
     }
