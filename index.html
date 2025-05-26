@@ -7,133 +7,96 @@
   <title>Mela! Mela! Anime Japan!! | Countdown Generator</title>
   <style>
     body {
-      background: #0a0000;
       margin: 0;
-      overflow-x: hidden;
+      padding: 2rem 1rem;
+      background-color: #000;
+      color: white;
       font-family: 'Inter', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
-      padding: 1rem;
-    }
-
-    #countdown-container {
-      max-width: 90%;
-      margin-top: 20px;
     }
 
     #countdownImage {
       width: 100%;
       max-width: 480px;
       height: auto;
-      display: block;
-      margin: 0 auto 16px auto;
+      margin-bottom: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
     }
 
     .button-group {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       align-items: center;
+      margin-bottom: 2rem;
     }
 
-    .button-group a,
-    .button-group button {
-      background: white;
-      color: black;
+    .button-group button,
+    .button-group a {
+      width: 280px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 1rem;
       font-weight: 600;
       border: none;
-      border-radius: 8px;
-      padding: 12px 20px;
-      text-decoration: none;
-      font-size: 1rem;
-      cursor: pointer;
-      width: 280px;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-decoration: none;
+      color: #000;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    .blob {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle at 35% 35%, #FF5050, #4D0000);
-      border-radius: 50%;
-      filter: blur(200px);
-      opacity: 0.6;
-      pointer-events: none;
-      z-index: 0;
-      mix-blend-mode: screen;
-      animation: floatBlob 20s ease-in-out infinite alternate;
-      transform: translate(-50%, -50%);
-    }
-
-    @keyframes floatBlob {
-      0% { transform: translate(-90%, -90%) scale(1.05); }
-      25% { transform: translate(-20%, -70%) scale(1.25); }
-      50% { transform: translate(10%, -30%) scale(0.85); }
-      75% { transform: translate(50%, 40%) scale(1.2); }
-      100% { transform: translate(-50%, 10%) scale(1.0); }
-    }
-
-    .noise {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJNJREFUeNrs1DEOwiAQRNHuP//rGwUIIS9ykRJp9zqTiFqLmedzGqUJD7BMDLkIAQIECBAgQID8JfB7cgypCT6B01pY1Ia03uOITkkpFmS6rT7ebcFvY6YrD2V7I9u+Yc48sEA4O7YZwdj0ivhWuhHrJ+nh/xZ7vzTBAgQIECBAgMDPAgwA2R5DjFq8m+4AAAAASUVORK5CYII=");
-      opacity: 0.03;
-      animation: grainMotion 1s steps(3) infinite;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes grainMotion {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(-1px, 1px); }
-      50% { transform: translate(1px, -1px); }
-      75% { transform: translate(-1px, -1px); }
-      100% { transform: translate(0, 0); }
+    .button-group button:hover,
+    .button-group a:hover {
+      transform: scale(1.03);
     }
 
     .footer {
-      position: fixed;
-      bottom: 12px;
-      right: 16px;
-      font-size: 1rem;
-      color: white;
+      margin-top: auto;
       text-align: right;
-      line-height: 1.5;
-      font-weight: 600;
+      font-size: 0.85rem;
+      color: white;
+      width: 100%;
+      max-width: 960px;
     }
 
     .footer a {
       color: white;
+      font-weight: 600;
+      font-size: 1rem;
       text-decoration: none;
+      float: right;
     }
 
     .footer span {
-      display: block;
-      font-weight: normal;
-      font-size: 0.75rem;
+      float: left;
+    }
+
+    @media (max-width: 500px) {
+      .button-group button,
+      .button-group a {
+        width: 90%;
+      }
+      .footer {
+        text-align: center;
+      }
+      .footer span,
+      .footer a {
+        float: none;
+        display: block;
+        margin: 0.25rem 0;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="blob"></div>
-  <div class="noise"></div>
-
-  <div id="countdown-container">
-    <img id="countdownImage" src="generated.png" alt="Countdown Image" />
-  </div>
-
+  <img id="countdownImage" src="generated.png" alt="Countdown Image" />
   <div class="button-group">
     <button id="download_button">💾 Download Image</button>
     <a href="https://twitter.com/intent/tweet?text=Mela! Mela! Anime Japan!! Countdown is on! 🎉%0AJoin us at mmaj.jp%0A%0A#mmaj_2025%0A#MelaMelaAnimeJapan%0A#MelaMelaAnimeJapan2025%0A%0A@mmaj_official" target="_blank">🐦 Share on X</a>
@@ -141,8 +104,17 @@
   </div>
 
   <div class="footer">
-    <a href="https://mmaj.jp" target="_blank">🔗 mmaj.jp</a>
     <span>© Mela! Mela! Anime Japan!! Executive Committee</span>
+    <a href="https://mmaj.jp" target="_blank">🔗 mmaj.jp</a>
   </div>
+
+  <script>
+    document.getElementById("download_button").addEventListener("click", function () {
+      const link = document.createElement("a");
+      link.download = "mmaj_countdown.png";
+      link.href = document.getElementById("countdownImage").src;
+      link.click();
+    });
+  </script>
 </body>
 </html>
