@@ -103,8 +103,14 @@
     };
 
     document.getElementById("download_button").onclick = () => {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const filename = `mmaj_countdown_instagram_${yyyy}-${mm}-${dd}.png`;
+
       const link = document.createElement("a");
-      link.download = "countdown_instagram.png";
+      link.download = filename;
       link.href = canvas.toDataURL("image/png");
       link.click();
     };
