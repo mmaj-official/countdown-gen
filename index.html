@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,45 +8,53 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      font-family: 'Inter', sans-serif;
+      background-color: #000;
       color: white;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
-    #status {
-      margin-top: 20px;
+    canvas {
+      max-width: 90vw;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    button, a {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      background-color: #ff3c3c;
+      border: none;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
   <canvas id="canvas" width="1080" height="1080"></canvas>
-  <p id="status">Generating image...</p>
-
-  <img id="bg" src="https://storage.googleapis.com/studio-design-asset-files/projects/V5a7N82mqR/s-1080x1080_v-fs_webp_d524d621-b749-4a5c-907c-92308a1d1ef9.png" style="display: none" crossorigin="anonymous" />
+  <div>
+    <button id="download_button">画像をダウンロード</button>
+    <a href="index_instagram.html">Instagramに投稿</a>
+  </div>
 
   <script>
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
-    const img = document.getElementById("bg");
-    const status = document.getElementById("status");
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = "https://mmaj-official.github.io/countdown-gen/Countdown_template.png";
 
     img.onload = () => {
       document.fonts.ready.then(() => {
         const now = new Date();
         const target = new Date(Date.UTC(2025, 8, 12, 18, 30, 0));
         const diff = target - now;
-
-        if (diff <= 0) {
-          status.innerText = "The event has passed.";
-          return;
-        }
-
         const totalSec = Math.floor(diff / 1000);
         const days = Math.floor(totalSec / 86400);
         const hours = Math.floor((totalSec % 86400) / 3600);
@@ -60,18 +68,14 @@
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-
-        const link = document.createElement("a");
-        link.download = "countdown.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-
-        status.innerText = "✅ Image downloaded.";
       });
     };
 
-    img.onerror = () => {
-      status.innerText = "⚠️ Failed to load image.";
+    document.getElementById("download_button").onclick = () => {
+      const link = document.createElement("a");
+      link.download = "countdown.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
     };
   </script>
 </body>
