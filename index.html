@@ -19,7 +19,7 @@
       box-sizing: border-box;
     }
 
-    #countdownImage {
+    canvas {
       width: 100%;
       max-width: 480px;
       height: auto;
@@ -91,7 +91,8 @@
   </style>
 </head>
 <body>
-  <img id="countdownImage" src="https://raw.githubusercontent.com/mmaj-official/countdown-gen/2b57c8227bab02d9c7088aca209f1a14b9a29741/Countdown_template.png" alt="Countdown Image" />
+  <canvas id="countdownCanvas" width="1080" height="1080"></canvas>
+
   <div class="button-group">
     <button id="download_button">💾 Download Image</button>
     <a href="https://twitter.com/intent/tweet?text=Mela! Mela! Anime Japan!! Countdown is on! 🎉%0AJoin us at mmaj.jp%0A%0A#mmaj_2025%0A#MelaMelaAnimeJapan%0A#MelaMelaAnimeJapan2025%0A%0A@mmaj_official" target="_blank">🐦 Share on X</a>
@@ -104,10 +105,53 @@
   </div>
 
   <script>
+    const canvas = document.getElementById("countdownCanvas");
+    const ctx = canvas.getContext("2d");
+    const baseImage = new Image();
+    baseImage.crossOrigin = "anonymous";
+    baseImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/2b57c8227bab02d9c7088aca209f1a14b9a29741/Countdown_template.png";
+
+    function pad(n) {
+      return n.toString().padStart(2, '0');
+    }
+
+    function updateCanvas() {
+      const targetDate = new Date(Date.UTC(2025, 8, 12, 18, 30, 0)); // 2025-09-13T00:00+0530
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        return "00d 00h 00m 00s";
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+    }
+
+    function drawCountdown() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+
+      const text = updateCanvas();
+      ctx.fillStyle = "white";
+      ctx.font = "60px 'Inter', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 20);
+    }
+
+    baseImage.onload = () => {
+      drawCountdown();
+      setInterval(drawCountdown, 1000);
+    };
+
     document.getElementById("download_button").addEventListener("click", function () {
       const link = document.createElement("a");
       link.download = "mmaj_countdown.png";
-      link.href = document.getElementById("countdownImage").src;
+      link.href = canvas.toDataURL();
       link.click();
     });
   </script>
