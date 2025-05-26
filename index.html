@@ -1,66 +1,56 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mela! Mela! Anime Japan!! | Countdown Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      padding: 2rem 1rem;
-      background-color: #000;
-      color: white;
       font-family: 'Inter', sans-serif;
+      background: black;
+      color: white;
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      box-sizing: border-box;
-      position: relative;
     }
 
     canvas {
-      width: 100%;
-      max-width: 480px;
+      max-width: 90%;
       height: auto;
-      margin-bottom: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+      display: block;
+      margin: 0 auto;
     }
 
     .button-group {
       display: flex;
       flex-direction: column;
-      gap: 14px;
       align-items: center;
-      width: 100%;
-      max-width: 320px;
-      margin-bottom: 2rem;
+      gap: 12px;
+      margin-top: 24px;
+      width: 280px;
     }
 
-    .button-group button,
-    .button-group a {
-      display: block;
+    button {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 20px;
       width: 100%;
-      padding: 12px 18px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
       border: none;
-      text-align: center;
-      text-decoration: none;
-      color: #000;
-      background: #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      border-radius: 8px;
       cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .button-group button:hover,
-    .button-group a:hover {
-      transform: scale(1.03);
+      background-color: white;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     }
 
     .footer {
@@ -68,81 +58,88 @@
       bottom: 12px;
       right: 16px;
       text-align: right;
+      font-size: 12px;
+      font-weight: 500;
       color: white;
-      line-height: 1.5;
-      font-size: 0.9rem;
-      font-weight: 400;
     }
 
     .footer a {
       color: white;
       font-weight: 600;
-      font-size: 1rem;
       text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .italic {
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-  <canvas id="countdownCanvas" width="1080" height="1080"></canvas>
-
+  <canvas id="canvas" width="1080" height="1080"></canvas>
   <div class="button-group">
-    <button id="download_button">💾 Download Image</button>
-    <a href="https://twitter.com/intent/tweet?text=Mela! Mela! Anime Japan!! Countdown is on! 🎉%0AJoin us at mmaj.jp%0A%0A#mmaj_2025%0A#MelaMelaAnimeJapan%0A#MelaMelaAnimeJapan2025%0A%0A@mmaj_official" target="_blank">🐦 Share on X</a>
-    <a href="index_instagram.html">📸 Share on Instagram</a>
+    <button onclick="downloadImage()">💾 Download Image</button>
+    <button onclick="shareOnX()">🐦 Share on X</button>
+    <button onclick="shareOnInstagram()">📸 Share on Instagram</button>
   </div>
-
   <div class="footer">
-    <a href="https://mmaj.jp" target="_blank">🔗 mmaj.jp</a><br>
-    <span>© Mela! Mela! Anime Japan!! Executive Committee</span>
+    <a href="https://mmaj.jp" target="_blank">🔗 mmaj.jp</a>
+    <div>© Mela! Mela! Anime Japan!! Executive Committee</div>
   </div>
 
   <script>
-    const canvas = document.getElementById("countdownCanvas");
+    const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
-    const baseImage = new Image();
-    baseImage.crossOrigin = "anonymous";
-    baseImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/2b57c8227bab02d9c7088aca209f1a14b9a29741/Countdown_template.png";
 
-    function pad(n) {
-      return n.toString().padStart(2, '0');
-    }
+    const bgImage = new Image();
+    bgImage.src = "https://mmaj-official.github.io/countdown-gen/Countdown_template.png";
 
-    function getCountdownText() {
-      const targetDate = new Date(Date.UTC(2025, 8, 12, 18, 30, 0)); // 9/13 0:00 IST
+    bgImage.onload = () => {
+      ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+
+      const targetDate = new Date(Date.UTC(2025, 8, 12, 18, 30, 0)); // Sept 13, 2025 00:00 IST
       const now = new Date();
       const diff = targetDate - now;
 
-      if (diff <= 0) return "00d 00h 00m 00s";
-
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+      const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+      const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+      const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
 
-      return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-    }
+      const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-    function drawCountdown() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
-      const text = getCountdownText();
+      ctx.font = "48px 'Inter', sans-serif";
+      ctx.font = "48px 'Inter', italic";
       ctx.fillStyle = "white";
-      ctx.font = "60px Inter, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 20);
-    }
-
-    baseImage.onload = () => {
-      drawCountdown();
+      ctx.fillText(countdownText, canvas.width / 2, canvas.height / 2.2);
     };
 
-    document.getElementById("download_button").addEventListener("click", function () {
+    function downloadImage() {
       const link = document.createElement("a");
-      const today = new Date().toISOString().split('T')[0];
-      link.download = `mmaj_countdown_${today}.png`;
-      link.href = canvas.toDataURL();
+      const now = new Date().toISOString().slice(0, 10);
+      link.download = `mmaj_countdown_${now}.png`;
+      link.href = canvas.toDataURL("image/png");
       link.click();
-    });
+    }
+
+    function shareOnX() {
+      const text = encodeURIComponent(
+        `Mela! Mela! Anime Japan!! Countdown is on! 🎉
+Join us at mmaj.jp
+
+#mmaj_2025
+#MelaMelaAnimeJapan
+#MelaMelaAnimeJapan2025
+
+@mmaj_official`
+      );
+      window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
+    }
+
+    function shareOnInstagram() {
+      window.location.href = "https://countdown.mmaj.jp/instagram";
+    }
   </script>
 </body>
 </html>
