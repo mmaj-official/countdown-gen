@@ -49,6 +49,7 @@
       width: 240px;
     }
     .footer {
+      z-index: 2;
       position: absolute;
       right: 12px;
       bottom: 10px;
@@ -62,11 +63,13 @@
       font-weight: bold;
     }
     @media (max-width: 768px) {
+  .footer { bottom: auto; top: auto; margin-top: 24px; position: relative; text-align: center; }
   body { justify-content: flex-start; padding-top: 40px; }
       canvas {
         max-width: 88vw;
       }
       .footer {
+      z-index: 2;
         font-size: 11px;
       }
     }
