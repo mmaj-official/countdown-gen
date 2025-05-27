@@ -7,7 +7,7 @@
   <meta name="description" content="Mela! Mela! Anime Japan!! Countdown Generator">
   <meta property="og:title" content="Mela! Mela! Anime Japan!! Countdown Generator">
   <meta property="og:description" content="Generate your own countdown image for Mela! Mela! Anime Japan!!">
-  <meta property="og:image" content="https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png">
+  <meta property="og:image" content="https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png">
   <title>MMAJ Instagram Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap" rel="stylesheet">
   <style>
@@ -29,9 +29,6 @@
       padding: 40px 20px;
     }
     canvas {
-  display: block;
-  margin: 0 auto;
-  max-height: 50vh;
       max-width: 80vw; max-height: 60vh;
       height: auto;
     }
@@ -42,7 +39,7 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      margin-top: 0px;
+      margin-top: 20px;
     }
     button {
       background: white;
@@ -70,18 +67,6 @@
       font-weight: bold;
     }
     @media (max-width: 768px) {
-  canvas {
-    display: block;
-    margin: 0 auto;
-    max-height: 45vh;
-    max-width: 85vw;
-  }
-  .tag-us {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin: 0px 0 6px;
-  }
   body {
     justify-content: flex-start;
     align-items: center;
@@ -105,30 +90,17 @@
   body { justify-content: flex-start; align-items: flex-start; padding: 40px 20px; }
   body { justify-content: flex-start; padding-top: 40px; }
       canvas {
-  display: block;
-  margin: 0 auto;
-  max-height: 50vh;
         max-width: 88vw;
-        height: auto;
       }
       .footer {
       align-self: flex-end;
         font-size: 11px;
       }
     }
-    .tag-us {
-    text-align: center;
-    margin: 0px 6;
-    text-align: center;
-    font-size: 13px;
-    opacity: 0.7;
-    margin: 0px 0 0px;
-    text-align: center;
-  }
-</style>
+  </style>
 </head>
 <body>
-  <canvas id="canvas" width="1080" height="1350"></canvas>
+  <canvas id="canvas" width="1080" height="1080"></canvas>
   <div class="tag-us">🏷️ Please tag us: @mmaj_official</div>
   <div class="buttons">
     <button onclick="downloadImage()">💾 Download Image</button>
@@ -145,9 +117,9 @@
 
     const bgImage = new Image();
     bgImage.crossOrigin = "anonymous";
-    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
+    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
 
-    const targetDate = new Date("2025-09-13T00:00:00+05:30");
+    const targetDate = new Date("2025-09-13T11:00:00+05:30");
 
     function formatCountdown() {
       const now = new Date();
@@ -185,8 +157,7 @@
 
     function shareOnX() {
       const text = encodeURIComponent(`Mela! Mela! Anime Japan!! Countdown is on! 🎉\nJoin us at mmaj.jp\n\n#mmaj_2025\n#MelaMelaAnimeJapan\n#MelaMelaAnimeJapan2025\n\n@mmaj_official`);
-      const url = encodeURIComponent("https://mmaj.jp");
-      window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+      window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
     }
 
     function shareOnInstagram() {
@@ -198,26 +169,3 @@
 </script>
 </body>
 </html>
-
-<style>
-@media (max-width: 768px) {
-  canvas {
-    display: block;
-    margin: 0 auto;
-    max-height: 45vh;
-    max-width: 85vw;
-  }
-  .tag-us {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin: 12px 0 6px;
-  }
-  .tag-us {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin: 0px 0 6px;
-  }
-}
-</style>
