@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mela! Mela! Anime Japan!! | Countdown Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -105,7 +105,7 @@
       const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
       ctx.fillStyle = "white";
-      ctx.font = "italic 72px 'Inter'";
+      ctx.font = "italic 72px 'Inter', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(countdownText, canvas.width / 2, canvas.height / 2 + 30);
     };
