@@ -77,7 +77,9 @@
     max-width: 85vw;
   }
   .tag-us {
-    text-align: center !important;
+    display: block;
+    width: 100%;
+    text-align: center;
     margin: 12px 0 6px;
   }
   body {
@@ -116,7 +118,7 @@
     }
     .tag-us {
     text-align: center;
-    margin: 0px 0;
+    margin: 12px 0;
     text-align: center;
     font-size: 13px;
     opacity: 0.7;
@@ -126,7 +128,7 @@
 </style>
 </head>
 <body>
-  <canvas id="canvas" width="1080" height="1350"></canvas>
+  <canvas id="canvas" width="1080" height="1080"></canvas>
   <div class="tag-us">🏷️ Please tag us: @mmaj_official</div>
   <div class="buttons">
     <button onclick="downloadImage()">💾 Download Image</button>
@@ -143,7 +145,7 @@
 
     const bgImage = new Image();
     bgImage.crossOrigin = "anonymous";
-    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
+    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
 
     const targetDate = new Date("2025-09-13T00:00:00+05:30");
 
@@ -206,8 +208,16 @@
     max-width: 85vw;
   }
   .tag-us {
-    text-align: center !important;
-    margin: 12px 0 3px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 12px 0 6px;
+  }
+  .tag-us {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 12px 0 6px;
   }
 }
 </style>
