@@ -54,10 +54,12 @@
     }
 
     .footer {
+      box-sizing: border-box;
+      word-break: keep-all;
       text-align: right;
       font-size: 0.75rem;
       color: white;
-      padding: 4px 8px 10px 8px;
+      padding: 8px 12px 12px 12px;
       width: 100%;
       box-sizing: border-box;
     }
@@ -105,7 +107,7 @@
       const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
       ctx.fillStyle = "white";
-      ctx.font = "italic 78px 'Inter', sans-serif";
+      ctx.font = "78px 'Inter', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(countdownText, canvas.width / 2, canvas.height / 2 + 30);
     };
