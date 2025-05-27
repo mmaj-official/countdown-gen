@@ -7,7 +7,7 @@
   <meta name="description" content="Mela! Mela! Anime Japan!! Countdown Generator">
   <meta property="og:title" content="Mela! Mela! Anime Japan!! Countdown Generator">
   <meta property="og:description" content="Generate your own countdown image for Mela! Mela! Anime Japan!!">
-  <meta property="og:image" content="https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png">
+  <meta property="og:image" content="https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png">
   <title>MMAJ Instagram Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap" rel="stylesheet">
   <style>
@@ -29,7 +29,7 @@
       padding: 40px 20px;
     }
     canvas {
-  max-height: 60vh;
+  max-height: 50vh;
       max-width: 80vw; max-height: 60vh;
       height: auto;
     }
@@ -91,8 +91,9 @@
   body { justify-content: flex-start; align-items: flex-start; padding: 40px 20px; }
   body { justify-content: flex-start; padding-top: 40px; }
       canvas {
-  max-height: 60vh;
+  max-height: 50vh;
         max-width: 88vw;
+        height: auto;
       }
       .footer {
       align-self: flex-end;
@@ -103,13 +104,13 @@
     text-align: center;
     font-size: 13px;
     opacity: 0.7;
-    margin: 12px 0 12px;
+    margin: 4px 0 12px;
     text-align: center;
   }
 </style>
 </head>
 <body>
-  <canvas id="canvas" width="1080" height="1350"></canvas>
+  <canvas id="canvas" width="1080" height="1080"></canvas>
   <div class="tag-us">🏷️ Please tag us: @mmaj_official</div>
   <div class="buttons">
     <button onclick="downloadImage()">💾 Download Image</button>
@@ -126,7 +127,7 @@
 
     const bgImage = new Image();
     bgImage.crossOrigin = "anonymous";
-    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
+    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
 
     const targetDate = new Date("2025-09-13T00:00:00+05:30");
 
