@@ -7,7 +7,7 @@
   <meta name="description" content="Mela! Mela! Anime Japan!! Countdown Generator">
   <meta property="og:title" content="Mela! Mela! Anime Japan!! Countdown Generator">
   <meta property="og:description" content="Generate your own countdown image for Mela! Mela! Anime Japan!!">
-  <meta property="og:image" content="https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png">
+  <meta property="og:image" content="https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png">
   <title>MMAJ Instagram Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap" rel="stylesheet">
   <style>
@@ -97,15 +97,21 @@
         font-size: 11px;
       }
     }
-  </style>
+    .tag-us {
+    font-size: 13px;
+    opacity: 0.7;
+    margin: 16px 0 8px;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
   <canvas id="canvas" width="1080" height="1080"></canvas>
+  <div class="tag-us">🏷️ Please tag us: @mmaj_official</div>
   <div class="buttons">
     <button onclick="downloadImage()">💾 Download Image</button>
-    <button onclick="goBack()">🔙 Back to Square Image</button>
-    <button onclick="shareOnX()">🐦 Share on X</button>
     <button onclick="shareOnInstagram()">📸 Share on Instagram</button>
+    <button onclick="goBack()">🔙 Back to Square Image</button>
   </div>
   <div class="footer">
     <a href="https://mmaj.jp" target="_blank">🔗 mmaj.jp</a><br>
@@ -117,7 +123,7 @@
 
     const bgImage = new Image();
     bgImage.crossOrigin = "anonymous";
-    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
+    bgImage.src = "https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/https://raw.githubusercontent.com/mmaj-official/countdown-gen/main/Countdown_template_instagram.png";
 
     const targetDate = new Date("2025-09-13T00:00:00+05:30");
 
@@ -156,7 +162,7 @@
     }
 
     function shareOnX() {
-      const text = encodeURIComponent(`Mela! Mela! Anime Japan!! Countdown is on! 🎉\nCheck out the Instagram version at mmaj.jp\n\n#mmaj_2025\n#MelaMelaAnimeJapan\n#MelaMelaAnimeJapan2025\n\n@mmaj_official`);
+      const text = encodeURIComponent(`Mela! Mela! Anime Japan!! Countdown is on! 🎉\nJoin us at mmaj.jp\n\n#mmaj_2025\n#MelaMelaAnimeJapan\n#MelaMelaAnimeJapan2025\n\n@mmaj_official`);
       const url = encodeURIComponent("https://mmaj.jp");
       window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
     }
